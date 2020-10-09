@@ -9,7 +9,7 @@ The board game is constituted of 9 boxes<br>
 Press the corresponding number on your keyboard to place the token.<br>
 It is not allowed to play where another player already played.<br><br>
 
-##2 players tic tac toe
+## 2 players tic tac toe
 1. Run tic_server.py
 2. Run tic_client.py twice, one for each player
 3. Enjoy the game<br>
