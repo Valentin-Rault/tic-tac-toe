@@ -1,0 +1,41 @@
+PLayer played: 1
+
+x| | 
+-----
+ | | 
+-----
+ | | 
+
+Bot played: 8
+
+x| | 
+-----
+ | | 
+-----
+ |o| 
+
+PLayer played: 2
+
+x|x| 
+-----
+ | | 
+-----
+ |o| 
+
+Bot played: 9
+
+x|x| 
+-----
+ | | 
+-----
+ |o|o
+
+PLayer played: 3
+
+x|x|x
+-----
+ | | 
+-----
+ |o|o
+
+The player won.
