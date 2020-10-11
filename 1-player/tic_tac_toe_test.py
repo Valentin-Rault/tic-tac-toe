@@ -2,10 +2,6 @@ import unittest
 import os
 from unittest import mock
 
-# from parameterized import parameterized, parameterized_class
-# TODO: install and check doc parameterized
-# TODO: list problem for python bloc post about common python problems
-
 import tic_tac_toe as ts
 
 
@@ -67,8 +63,6 @@ class TicPlayerTest(unittest.TestCase):
         self.assertFalse(ts.switch_player(player))
 
 
-# @parameterized_class(('board',), [({'1': ' ', '2': ' ', '3': ' ', '4': ' ', '5': ' ', '6': ' ',
-#                                   '7': ' ', '8': ' ', '9': ' '},)])
 class WinTest(unittest.TestCase):
 
     def setUp(self):
@@ -81,12 +75,6 @@ class WinTest(unittest.TestCase):
         result = ts.check_win(self.player, self.game_active, self.board)
         self.assertEqual(result, (True, False))
 
-    # @ parameterized.expand(('board["1"]', 'board["2"]', 'board["3"]', 'board["4"]', 'board["5"]', 'board["6"]',
-    #                 'board["7"]', 'board["8"]', 'board["9"]'), [
-    #     ('x', 'x', 'x', ' ', ' ', ' ', ' ', ' ', ' ')
-    # ])
-    # @ parameterized.expand('board', [{'1': 'x', '2': 'x', '3': 'x', '4': ' ', '5': ' ', '6': ' ',
-    #                              '7': ' ', '8': ' ', '9': ' '}])
     def test_win_board_1_1(self):
         self.board['1'] = self.board['2'] = self.board['3'] = 'x'
         self.assertEqual(ts.check_win(self.player, self.game_active, self.board), (False, 'The player'))
