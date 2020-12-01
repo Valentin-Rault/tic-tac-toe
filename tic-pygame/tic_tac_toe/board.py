@@ -1,10 +1,8 @@
 import pygame
 
-from .constants import WIDTH, ROWS, COLS, SQUARE_SIZE, BLACK, WHITE
+from .constants import ROWS, COLS, SQUARE_SIZE, BLACK, WHITE, SQUARE_PADDING, BOARD_PADDING_LEFT, BOARD_PADDING_TOP
+from .symbols import XSymbol, OSymbol
 
-SQUARE_PADDING = 5
-BOARD_PADDING_LEFT = WIDTH // 4 - 2 * SQUARE_PADDING
-BOARD_PADDING_TOP = 20
 
 class Board:
     def __init__(self):
@@ -16,13 +14,24 @@ class Board:
         for row in range(ROWS):
             self.board.append([])
             for col in range(COLS):
-                self.board[row].append('')
+                self.board[row].append(0)
 
     def draw_squares(self, win):
         win.fill(BLACK)
         for row in range(ROWS):
             for col in range(COLS):
-                x = col * SQUARE_SIZE + col * SQUARE_PADDING + BOARD_PADDING_TOP
-                y = row * SQUARE_SIZE + row * SQUARE_PADDING + BOARD_PADDING_LEFT
-                pygame.draw.rect(win, WHITE, (y, x, SQUARE_SIZE, SQUARE_SIZE))
+                x = col * SQUARE_SIZE + col * SQUARE_PADDING + BOARD_PADDING_LEFT
+                y = row * SQUARE_SIZE + row * SQUARE_PADDING + BOARD_PADDING_TOP
+                pygame.draw.rect(win, WHITE, (x, y, SQUARE_SIZE, SQUARE_SIZE))
+
+    def draw(self, win):
+        self.draw_squares(win)
+        for row in range(ROWS):
+            for col in range(COLS):
+                symbol = self.board[row][col]
+                if symbol != 0:
+                    symbol.draw(win)
+
+    def move(self, row, col):
+        self.board[row][col] = OSymbol(row, col)
 
