@@ -1,11 +1,17 @@
 import pygame
 
-from tic_tac_toe.constants import WIDTH, HEIGHT
+from tic_tac_toe.constants import WIDTH, HEIGHT, SQUARE_SIZE, SQUARE_PADDING, BOARD_PADDING_TOP, BOARD_PADDING_LEFT
 from tic_tac_toe.board import Board
 
 FPS = 60
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption('Tic Tac Toe')
+
+
+def get_row_col_from_mouse(x, y):
+    row = (y - BOARD_PADDING_TOP) // (SQUARE_SIZE + SQUARE_PADDING)
+    col = (x - BOARD_PADDING_LEFT) // (SQUARE_SIZE + SQUARE_PADDING)
+    return row, col
 
 
 def main():
@@ -20,7 +26,12 @@ def main():
             if event.type == pygame.QUIT:
                 run = False
 
-        board.draw_squares(WIN)
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                x, y = pygame.mouse.get_pos()
+                row, col = get_row_col_from_mouse(x, y)
+                board.move(row, col)
+
+        board.draw(WIN)
         pygame.display.update()
 
     pygame.quit()
