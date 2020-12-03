@@ -1,6 +1,7 @@
 import pygame
 
-from .constants import ROWS, COLS, SQUARE_SIZE, BLACK, WHITE, SQUARE_PADDING, BOARD_PADDING_LEFT, BOARD_PADDING_TOP
+from .constants import ROWS, COLS, SQUARE_SIZE, BLACK, WHITE, BLUE, RED,\
+                       SQUARE_PADDING, BOARD_PADDING_LEFT, BOARD_PADDING_TOP
 from .symbols import XSymbol, OSymbol
 
 
@@ -32,6 +33,31 @@ class Board:
                 if symbol != 0:
                     symbol.draw(win)
 
-    def move(self, row, col):
-        self.board[row][col] = OSymbol(row, col)
+    def move(self, row, col, turn):
+        if turn == BLUE:
+            self.board[row][col] = XSymbol(row, col, turn)
+        elif turn == RED:
+            self.board[row][col] = OSymbol(row, col, turn)
 
+        self.white_space -= 1
+
+    def get_value(self, row, col):
+        return self.board[row][col]
+
+    def is_move_left(self):
+        if self.white_space > 0:
+            return True
+        return False
+
+    def winner(self):
+        if type(self.board[0][0]) == type(self.board[1][1]) == type(self.board[2][2]) and not isinstance(self.board[0][0], int):
+            return True
+        elif type(self.board[0][2]) == type(self.board[1][1]) == type(self.board[2][0]) and not isinstance(self.board[0][2], int):
+            return True
+        else:
+            for row in range(ROWS):
+                if type(self.board[row][0]) == type(self.board[row][1]) == type(self.board[row][2]) and not isinstance(self.board[row][0], int):
+                    return True
+            for col in range(COLS):
+                if type(self.board[0][col]) == type(self.board[1][col]) == type(self.board[2][col]) and not isinstance(self.board[0][col], int):
+                    return True

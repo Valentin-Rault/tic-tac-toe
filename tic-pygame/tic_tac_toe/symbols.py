@@ -4,10 +4,10 @@ from .constants import BLUE, RED, WHITE, SQUARE_SIZE, SQUARE_PADDING, BOARD_PADD
 
 
 class Symbol:
-    def __init__(self, row, col):
+    def __init__(self, row, col, color):
         self.row = row
         self.col = col
-        self.color = BLUE
+        self.color = color
         self.x = 0
         self.y = 0
         self.calc_pos()
@@ -18,18 +18,18 @@ class Symbol:
 
 
 class XSymbol(Symbol):
-    def __init__(self, row, col):
-        super().__init__(row, col)
+    def __init__(self, row, col, color):
+        super().__init__(row, col, color)
 
     def draw(self, win):
-        pygame.draw.line(win, BLUE,  (self.x - 38, self.y - 38), (self.x + 38, self.y + 38), 10)
-        pygame.draw.line(win, BLUE,  (self.x + 38, self.y - 38), (self.x - 38, self.y + 38), 10)
+        pygame.draw.line(win, self.color,  (self.x - 38, self.y - 38), (self.x + 38, self.y + 38), 10)
+        pygame.draw.line(win, self.color,  (self.x + 38, self.y - 38), (self.x - 38, self.y + 38), 10)
 
 
 class OSymbol(Symbol):
-    def __init__(self, row, col):
-        super().__init__(row, col)
+    def __init__(self, row, col, color):
+        super().__init__(row, col, color)
 
     def draw(self, win):
-        pygame.draw.circle(win, RED, (self.x, self.y), 48)
+        pygame.draw.circle(win, self.color, (self.x, self.y), 48)
         pygame.draw.circle(win, WHITE, (self.x, self.y), 38)

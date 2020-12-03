@@ -2,6 +2,7 @@ import pygame
 
 from tic_tac_toe.constants import WIDTH, HEIGHT, SQUARE_SIZE, SQUARE_PADDING, BOARD_PADDING_TOP, BOARD_PADDING_LEFT
 from tic_tac_toe.board import Board
+from tic_tac_toe.game import Game
 
 FPS = 60
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -17,7 +18,7 @@ def get_row_col_from_mouse(x, y):
 def main():
     run = True
     clock = pygame.time.Clock()
-    board = Board()
+    game = Game(WIN)
 
     while run:
         clock.tick(FPS)
@@ -29,9 +30,9 @@ def main():
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 x, y = pygame.mouse.get_pos()
                 row, col = get_row_col_from_mouse(x, y)
-                board.move(row, col)
+                run = game.play(row, col)
 
-        board.draw(WIN)
+        game.update()
         pygame.display.update()
 
     pygame.quit()
