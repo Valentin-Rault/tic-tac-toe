@@ -1,7 +1,6 @@
 import pygame
 
 from tic_tac_toe.constants import WIDTH, HEIGHT, SQUARE_SIZE, SQUARE_PADDING, BOARD_PADDING_TOP, BOARD_PADDING_LEFT
-from tic_tac_toe.board import Board
 from tic_tac_toe.game import Game
 
 FPS = 60

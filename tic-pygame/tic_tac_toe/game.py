@@ -1,6 +1,6 @@
 import pygame
 
-from .constants import BLUE, RED
+from .constants import BLUE, RED, BG_COLOR
 from .board import Board
 
 
@@ -29,8 +29,13 @@ class Game:
                 self.selected_row_col = None
                 self.select_square(row, col)
 
-        if self.board.get_value(row, col) == 0:
-            self.selected_row_col = row, col
+        try:
+            self.board.get_value(row, col)
+        except IndexError:
+            self.selected_row_col = None
+        else:
+            if self.board.get_value(row, col) == 0:
+                self.selected_row_col = row, col
 
     def confirm_move(self, row, col):
         if (row, col) == self.selected_row_col:
@@ -41,6 +46,9 @@ class Game:
         pass
 
     def update(self):
+        self.win.fill(BG_COLOR)
+        if self.selected_row_col:
+            self.board.highlight_selected(self.win, self.selected_row_col[0], self.selected_row_col[1], self.turn)
         self.board.draw(self.win)
         pygame.display.update()
 
