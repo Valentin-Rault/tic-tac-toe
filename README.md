@@ -13,9 +13,10 @@ It is not allowed to play where another player already played.<br><br>
 
 The code is implemented without loops as part of a constraint to use recursive functions.  
 
-* Next steps
-  * Create a UI using the pygame library to make the game more interactive.
-  * Create an AI with the implementation of the minimax algorithm.
+## Tic Pygame
+This folder is dedicated to the User Interface of the game made using the python library Pygame.  
+It is intended to be played by 1 player against an Artificial Intelligence.  
+The AI has been implemented using the minimax algorithm.  
 
 ## 2 players tic tac toe
 
