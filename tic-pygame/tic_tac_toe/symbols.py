@@ -25,6 +25,9 @@ class XSymbol(Symbol):
         pygame.draw.line(win, self.color,  (self.x - 38, self.y - 38), (self.x + 38, self.y + 38), 10)
         pygame.draw.line(win, self.color,  (self.x + 38, self.y - 38), (self.x - 38, self.y + 38), 10)
 
+    def __repr__(self):
+        return 'X'
+
 
 class OSymbol(Symbol):
     def __init__(self, row, col, color):
@@ -33,3 +36,14 @@ class OSymbol(Symbol):
     def draw(self, win):
         pygame.draw.circle(win, self.color, (self.x, self.y), 48)
         pygame.draw.circle(win, WHITE, (self.x, self.y), 38)
+
+    def __repr__(self):
+        return 'O'
+
+
+class EmptySymbol:
+    def __init__(self):
+        self.color = None
+
+    def __repr__(self):
+        return ' '

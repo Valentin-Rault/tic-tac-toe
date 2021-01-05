@@ -10,6 +10,7 @@ class Game:
         self.board = Board()
         self.turn = BLUE
         self.selected_row_col = None
+        self.is_active = True
 
     def change_turn(self):
         if self.turn == BLUE:
@@ -30,20 +31,17 @@ class Game:
                 self.select_square(row, col)
 
         try:
-            self.board.get_value(row, col)
+            color = self.board.get_value_color(row, col)
         except IndexError:
             self.selected_row_col = None
         else:
-            if self.board.get_value(row, col) == 0:
+            if color is None:
                 self.selected_row_col = row, col
 
     def confirm_move(self, row, col):
         if (row, col) == self.selected_row_col:
             return True
         return False
-
-    def highlight_selected(self):
-        pass
 
     def update(self):
         self.win.fill(BG_COLOR)
@@ -65,3 +63,13 @@ class Game:
                 print('Winner')
                 return False
         return True
+
+    def get_board(self):
+        return self.board
+
+    def ai_move(self, board):
+        if self.board.get_value_color(1, 1) is None:
+            self.board.move(1, 1, RED)
+        else:
+            self.board = board
+        self.change_turn()
