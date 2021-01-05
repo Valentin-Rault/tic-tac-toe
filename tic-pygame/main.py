@@ -1,7 +1,9 @@
 import pygame
 
-from tic_tac_toe.constants import WIDTH, HEIGHT, SQUARE_SIZE, SQUARE_PADDING, BOARD_PADDING_TOP, BOARD_PADDING_LEFT
+from tic_tac_toe.constants import WIDTH, HEIGHT, SQUARE_SIZE, SQUARE_PADDING, \
+                                  BOARD_PADDING_TOP, BOARD_PADDING_LEFT, RED
 from tic_tac_toe.game import Game
+from minimax.algorithm import minimax
 
 FPS = 60
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -15,24 +17,26 @@ def get_row_col_from_mouse(x, y):
 
 
 def main():
-    run = True
     clock = pygame.time.Clock()
     game = Game(WIN)
 
-    while run:
+    while game.is_active:
         clock.tick(FPS)
+
+        if game.turn == RED:
+            _, new_board = minimax(game.get_board(), 3, False)
+            game.ai_move(new_board)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                run = False
+                game.is_active = False
 
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 x, y = pygame.mouse.get_pos()
                 row, col = get_row_col_from_mouse(x, y)
-                run = game.play(row, col)
+                game.is_active = game.play(row, col)
 
         game.update()
-        pygame.display.update()
 
     pygame.quit()
 
